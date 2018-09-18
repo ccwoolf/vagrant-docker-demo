@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: example/webapp
+
+  proxy:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    image: example/nginx
+    ports:
+      - "80:80"

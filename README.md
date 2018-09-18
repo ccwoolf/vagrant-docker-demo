@@ -31,7 +31,7 @@ using Docker Compose to automate the running of multiple containers.
    referred to by hash.
 5. Rebuild the image, but this time add a tag - run `docker build --tag
    webapp .`.
-6. Notice that the build was much quicker - alomst instant. This is because
+6. Notice that the build was much quicker - almost instant. This is because
    Docker is able to determine that nothing has changed and simply rebuilds the
    image using a cache.
 7. Run `docker image list` again to show the image with a more usable name.

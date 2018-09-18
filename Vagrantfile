@@ -20,17 +20,25 @@ Vagrant.configure("2") do |config|
   # Docker's GPG key, add the repository, install Docker, and add the vagrant
   # user to the docker group.
   config.vm.provision "shell", inline: <<-SHELL
+    echo "Adding Docker GPG key"
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    echo ""
 
+    echo "Adding Docker repository"
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+    echo "Installing Docker"
     apt-get update
     apt-cache policy docker-ce
     apt-get install -y docker-ce
-    echo ""
 
+    echo "Installing Docker Compose"
+    curl -sL "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod -v +x /usr/local/bin/docker-compose
+
+    echo "Adding vagrant user to docker group"
     usermod -aG docker vagrant
 
+    echo "Check that Docker is up"
     systemctl status docker
   SHELL
 

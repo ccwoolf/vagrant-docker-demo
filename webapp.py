@@ -1,6 +1,6 @@
-#!/usr/biin/env python
-from flask import Flask
+#!/usr/bin/env python
 from colorhash import ColorHash
+from flask import Flask
 import socket
 
 app = Flask(__name__)
@@ -29,6 +29,7 @@ def hello():
     """
 
     return msg
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
